@@ -11,6 +11,14 @@ use LinusShops\Kickbox\Api\EmailVerifierInterface;
  */
 class EmailVerifier implements EmailVerifierInterface
 {
+    /** @var \LinusShops\Kickbox\Model\EmailFactory  */
+    private $emailFactory;
+
+    public function __construct(
+        EmailFactory $emailFactory
+    ){
+        $this->emailFactory = $emailFactory;
+    }
 
     /**
      * Verify an email against Kickbox.io. Returns the response model. Use this
@@ -23,7 +31,10 @@ class EmailVerifier implements EmailVerifierInterface
      */
     public function verify($email, $options = ['timeout' => 6000])
     {
-        // TODO: Implement verify() method.
+        return $this->emailFactory
+            ->create($options)
+            ->load($email)
+            ->verify($options);
     }
 
     /**
@@ -32,12 +43,18 @@ class EmailVerifier implements EmailVerifierInterface
      * can be delivered. 'deliverable' and 'risky' will both be considered
      * valid and return true.
      *
+     * If there is an undefined response, or the request failed, `null` will
+     * be returned, indicating that the check failed to complete and should
+     * be retried. This is to avoid flagging emails as invalid when the response
+     * was not conclusive.
+     *
      * @param string $email
      * @param array $options
      *
-     * @return bool
+     * @return bool|null
      */
     public function verifyIsDeliverable($email, $options = ['timeout' => 6000])
     {
-        // TODO: Implement verifyIsDeliverable() method.
-}}
+        return $this->verify($email, $options)->isDeliverable();
+    }
+}
