@@ -1,0 +1,9 @@
+[
+  {
+    "source": "magicdoc/response.json",
+    "destination": "src/app/code/local/Linus/Kickbox/Model/Email.php",
+    "types" : {
+
+    }
+  }
+]
