@@ -1,0 +1,26 @@
+{
+    "name": "linusshops/module-kickbox",
+    "description":"",
+    "keywords": [
+        "magento 2",
+        "magento2"
+    ],
+    "require": {
+        "php": "~5.6.0|7.0.2|~7.0.6",
+        "kickbox/kickbox": "2.1.0"
+    },
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "LinusShops\\Kickbox\\": ""
+        }
+    }
+}
