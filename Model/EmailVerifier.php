@@ -32,7 +32,7 @@ class EmailVerifier implements EmailVerifierInterface
     public function verify($email, $options = ['timeout' => 6000])
     {
         return $this->emailFactory
-            ->create($options)
+            ->create(['options' => $options])
             ->load($email)
             ->verify($options);
     }

@@ -6,6 +6,7 @@ use Kickbox\Client;
 use Kickbox\ClientFactory;
 use Kickbox\Exception\ClientException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Provides a Magento-friendly wrapper for the Kickbox API.
@@ -37,13 +38,19 @@ class Email
     private $kx_response;
     private $clientFactory;
     private $scopeConfig;
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
 
     public function __construct(
         ClientFactory $clientFactory,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        LoggerInterface $logger
     ) {
         $this->clientFactory = $clientFactory;
         $this->scopeConfig = $scopeConfig;
+        $this->logger = $logger;
     }
 
     /**
@@ -66,7 +73,7 @@ class Email
     {
         /** @var Client $client */
         $client = $this->clientFactory->create([
-            'auth' => $this->scopeConfig->getValue('linusshops_kickbox/api/key')
+            'auth' => $this->scopeConfig->getValue('linusshops_kickbox/general/api_key')
         ]);
 
         $kickbox = $client->kickbox();
@@ -74,7 +81,7 @@ class Email
         try {
             $this->kx_response = $kickbox->verify($this->email, $options);
         } catch (ClientException $ex) {
-            Mage::logException($ex);
+            $this->logger->error($ex->getMessage().' '.$ex->getTraceAsString());
         }
 
         return $this;
