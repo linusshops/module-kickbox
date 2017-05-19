@@ -1,6 +1,7 @@
 {
-    "name": "linusshops/module-kickbox",
-    "description":"",
+  "name": "linusshops/module-kickbox",
+  "license": "MIT",
+  "description":"",
     "keywords": [
         "magento 2",
         "magento2",
@@ -12,9 +13,6 @@
         "kickbox/kickbox": "2.1.0"
     },
     "type": "magento2-module",
-    "license": [
-        "MIT"
-    ],
     "authors": [
       {
         "name": "Sam Schmidt",
