@@ -16,12 +16,25 @@ use Magento\Framework\App\ResponseInterface;
  */
 class Index extends Action
 {
-    protected $json;
     /**
+     * The fluent standard json format response builder.
+     * @var \LinusShops\Common\Model\JsonResponseBuilder
+     */
+    protected $json;
+
+    /**
+     * Email verification handler.
      * @var \LinusShops\Kickbox\Model\EmailVerifier
      */
     private $emailVerifier;
 
+    /**
+     * Index constructor.
+     *
+     * @param Context $context
+     * @param JsonResponseBuilder $json
+     * @param EmailVerifier $emailVerifier
+     */
     public function __construct(
         Context $context,
         JsonResponseBuilder $json,

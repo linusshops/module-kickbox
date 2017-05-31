@@ -34,15 +34,43 @@ use Psr\Log\LoggerInterface;
 
 class Email
 {
-    private $email;
-    private $kx_response;
-    private $clientFactory;
-    private $scopeConfig;
     /**
+     * The email to check.
+     * @var string
+     */
+    private $email;
+
+    /**
+     * Response from the kickbox api.
+     * @var \Kickbox\HttpClient\Response
+     */
+    private $kx_response;
+
+    /**
+     * Kickbox client generator
+     * @var \Kickbox\ClientFactory
+     */
+    private $clientFactory;
+
+    /**
+     * Magento store config provider.
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    /**
+     * Magento logger handler.
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
+    /**
+     * Email constructor.
+     *
+     * @param ClientFactory $clientFactory
+     * @param ScopeConfigInterface $scopeConfig
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         ClientFactory $clientFactory,
         ScopeConfigInterface $scopeConfig,
@@ -54,7 +82,8 @@ class Email
     }
 
     /**
-     * @param $emailAddress
+     * Set the email to validate.
+     * @param string $emailAddress
      * @return $this
      */
     public function load($emailAddress)
@@ -69,7 +98,7 @@ class Email
      * @param array $options
      * @return $this
      */
-    public function verify($options = array('timeout' => 6000))
+    public function verify($options = ['timeout' => 6000])
     {
         /** @var Client $client */
         $client = $this->clientFactory->create([
@@ -90,8 +119,8 @@ class Email
     /**
      * Look up the given method name in the Kickbox response fields
      *
-     * @param $name
-     * @param $arguments
+     * @param string $name
+     * @param array $arguments
      * @return mixed
      */
     public function __call($name, $arguments)
@@ -104,7 +133,7 @@ class Email
     /**
      * Is the email deliverable?
      *
-     * `deliverable` and `risky` both return `true`. If there is an
+     * The `deliverable` and `risky` status both return `true`. If there is an
      * `Insufficient balance` or any other exception thrown in the `verify`
      * method, this returns `null`.
      *
@@ -113,7 +142,7 @@ class Email
     public function isDeliverable()
     {
         return (is_string($this->result()))
-            ? in_array($this->result(), array('deliverable', 'risky', 'unknown'))
+            ? in_array($this->result(), ['deliverable', 'risky', 'unknown'])
             : null;
 
     }

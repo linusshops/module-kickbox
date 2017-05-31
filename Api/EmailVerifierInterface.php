@@ -29,5 +29,5 @@ interface EmailVerifierInterface
      * @param array $options
      * @return bool
      */
-    public function verifyIsDeliverable($email, $options = array('timeout'=>6000));
+    public function verifyIsDeliverable($email, $options = ['timeout'=>6000]);
 }

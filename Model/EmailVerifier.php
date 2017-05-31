@@ -11,12 +11,21 @@ use LinusShops\Kickbox\Api\EmailVerifierInterface;
  */
 class EmailVerifier implements EmailVerifierInterface
 {
-    /** @var \LinusShops\Kickbox\Model\EmailFactory  */
+    /**
+     * Email instance builder.
+     *
+     * @var \LinusShops\Kickbox\Model\EmailFactory
+     */
     private $emailFactory;
 
+    /**
+     * EmailVerifier constructor.
+     *
+     * @param EmailFactory $emailFactory
+     */
     public function __construct(
         EmailFactory $emailFactory
-    ){
+    ) {
         $this->emailFactory = $emailFactory;
     }
 
@@ -32,7 +41,7 @@ class EmailVerifier implements EmailVerifierInterface
     public function verify($email, $options = ['timeout' => 6000])
     {
         return $this->emailFactory
-            ->create(['options' => $options])
+            ->create()
             ->load($email)
             ->verify($options);
     }
