@@ -31,7 +31,6 @@ use Psr\Log\LoggerInterface;
  * @method string message(...$parameters)
  * {{magicdoc_end}}
  */
-
 class Email
 {
     /**
@@ -83,7 +82,9 @@ class Email
 
     /**
      * Set the email to validate.
+     *
      * @param string $emailAddress
+     *
      * @return $this
      */
     public function load($emailAddress)
@@ -96,6 +97,7 @@ class Email
      * Query kickbox on the validity of the email contained in this object.
      *
      * @param array $options
+     *
      * @return $this
      */
     public function verify($options = ['timeout' => 6000])
@@ -110,7 +112,7 @@ class Email
         try {
             $this->kx_response = $kickbox->verify($this->email, $options);
         } catch (ClientException $ex) {
-            $this->logger->error($ex->getMessage().' '.$ex->getTraceAsString());
+            $this->logger->error($ex->getMessage() . ' ' . $ex->getTraceAsString());
         }
 
         return $this;
@@ -121,6 +123,7 @@ class Email
      *
      * @param string $name
      * @param array $arguments
+     *
      * @return mixed
      */
     public function __call($name, $arguments)
@@ -144,7 +147,5 @@ class Email
         return (is_string($this->result()))
             ? in_array($this->result(), ['deliverable', 'risky', 'unknown'])
             : null;
-
     }
 }
-

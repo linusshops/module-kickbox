@@ -3,7 +3,7 @@
 namespace LinusShops\Kickbox\Api;
 
 /**
- *
+ * Interface for the Kickbox email verifier.
  *
  * @author Sam Schmidt <samuel@dersam.net>
  */
@@ -15,6 +15,7 @@ interface EmailVerifierInterface
      *
      * @param string $email
      * @param array $options
+     *
      * @return \LinusShops\Kickbox\Model\Email
      */
     public function verify($email, $options = ['timeout' => 6000]);
@@ -27,6 +28,7 @@ interface EmailVerifierInterface
      *
      * @param string $email
      * @param array $options
+     *
      * @return bool
      */
     public function verifyIsDeliverable($email, $options = ['timeout'=>6000]);

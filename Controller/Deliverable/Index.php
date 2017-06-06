@@ -10,7 +10,7 @@ use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\ResponseInterface;
 
 /**
- *
+ * Ajax endpoint for validating an email against Kickbox.
  *
  * @author Sam Schmidt <samuel@dersam.net>
  */
@@ -49,7 +49,6 @@ class Index extends Action
      * Dispatch request
      *
      * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
      */
     public function execute()
     {
