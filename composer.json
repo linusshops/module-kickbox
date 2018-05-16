@@ -9,7 +9,6 @@
         "kickbox.io"
     ],
     "require": {
-        "php": "~5.6.0|7.0.2|~7.0.6",
         "kickbox/kickbox": "2.1.0"
     },
     "type": "magento2-module",
