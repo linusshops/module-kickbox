@@ -9,7 +9,7 @@
         "kickbox.io"
     ],
     "require": {
-        "kickbox/kickbox": "2.1.0"
+        "kickbox/kickbox": "2.2.5"
     },
     "type": "magento2-module",
     "authors": [
