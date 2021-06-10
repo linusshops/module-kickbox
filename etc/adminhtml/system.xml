@@ -10,7 +10,7 @@
         <tab id="linusshops" translate="label" sortOrder="500">
             <label>LinusShops</label>
         </tab>
-        <section id="linusshops_kickbox" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="linusshops_kickbox" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60">
             <label>Kickbox</label>
             <tab>linusshops</tab>
             <resource>LinusShops_Kickbox::config</resource>
