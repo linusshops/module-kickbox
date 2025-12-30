@@ -48,6 +48,9 @@ class Index extends Action
     /**
      * Dispatch request
      *
+     * todo: this is open and insecure. Add at least FormKey validation,
+     *  and some form of rate limiting to protect against abuse.
+     *
      * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
      */
     public function execute()
